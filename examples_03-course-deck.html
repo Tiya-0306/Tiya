@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>課程簡報範例 — ASR 自動語音辨識入門</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Sans TC', -apple-system, sans-serif; background: #0a0a0a; display: flex; flex-direction: column; align-items: center; padding: 2rem; gap: 1rem; }
+
+.slide {
+  width: 1280px; height: 720px;
+  transform: scale(0.55); transform-origin: top center;
+  margin-bottom: -324px;
+  position: relative; overflow: hidden;
+}
+
+/* Slide 1: Cover */
+.slide-1 {
+  background: linear-gradient(160deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  text-align: center; color: white;
+}
+.slide-1 .week { font-size: 18px; letter-spacing: 0.3em; text-transform: uppercase; color: #e74c3c; font-weight: 700; margin-bottom: 24px; }
+.slide-1 h1 { font-size: 72px; font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+.slide-1 h1 span { color: #e74c3c; }
+.slide-1 .sub { font-size: 28px; color: #888; margin-bottom: 40px; }
+.slide-1 .meta { font-size: 16px; color: #555; }
+.slide-1 .corner { position: absolute; top: 40px; right: 50px; font-size: 14px; color: #444; }
+
+/* Slide 2: What is ASR */
+.slide-2 {
+  background: #fafafa; color: #1a1a1a; padding: 80px;
+}
+.slide-2 .label { font-size: 14px; font-weight: 700; color: #e74c3c; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; }
+.slide-2 h2 { font-size: 48px; font-weight: 800; margin-bottom: 40px; }
+.slide-2 .definition { font-size: 32px; color: #333; line-height: 1.6; padding: 30px 40px; border-left: 5px solid #e74c3c; background: #f5f5f5; margin-bottom: 40px; }
+.slide-2 .flow { display: flex; align-items: center; gap: 20px; font-size: 22px; color: #555; }
+.slide-2 .flow .arrow { color: #e74c3c; font-weight: 700; font-size: 28px; }
+.slide-2 .flow .box { background: #1a1a1a; color: white; padding: 12px 24px; border-radius: 6px; font-weight: 600; }
+
+/* Slide 3: Three engines */
+.slide-3 {
+  background: #1a1a1a; color: white; padding: 80px;
+}
+.slide-3 .label { font-size: 14px; font-weight: 700; color: #e74c3c; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; }
+.slide-3 h2 { font-size: 44px; font-weight: 800; margin-bottom: 50px; }
+.engines { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.engine { background: #252525; border-radius: 12px; padding: 36px; border-top: 4px solid; }
+.engine.w { border-color: #3498db; }
+.engine.b { border-color: #27ae60; }
+.engine.q { border-color: #f39c12; }
+.engine h3 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+.engine .desc { font-size: 18px; color: #aaa; margin-bottom: 16px; line-height: 1.5; }
+.engine .stat { font-size: 14px; color: #666; }
+.engine .stat strong { color: #ddd; font-size: 20px; }
+
+/* Slide 4: Common errors */
+.slide-4 {
+  background: #fafafa; color: #1a1a1a; padding: 80px;
+}
+.slide-4 .label { font-size: 14px; font-weight: 700; color: #e74c3c; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; }
+.slide-4 h2 { font-size: 44px; font-weight: 800; margin-bottom: 40px; }
+.error-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.error-item { background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 28px; }
+.error-item .type { font-size: 14px; font-weight: 700; color: #e74c3c; margin-bottom: 8px; }
+.error-item .example { font-size: 20px; margin-bottom: 8px; }
+.error-item .example .wrong { text-decoration: line-through; color: #999; }
+.error-item .example .right { color: #27ae60; font-weight: 700; }
+.error-item .note { font-size: 14px; color: #888; }
+
+/* Slide 5: Practice */
+.slide-5 {
+  background: linear-gradient(160deg, #16213e 0%, #0f3460 100%);
+  color: white; padding: 80px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.slide-5 h2 { font-size: 52px; font-weight: 900; margin-bottom: 50px; }
+.steps { counter-reset: step; }
+.steps li { list-style: none; font-size: 26px; margin-bottom: 28px; padding-left: 60px; position: relative; color: #ddd; }
+.steps li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; width: 40px; height: 40px; background: #e74c3c; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; }
+.slide-5 .prompt { margin-top: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px 28px; font-family: monospace; font-size: 18px; color: #aaa; }
+</style>
+</head>
+<body>
+
+<!-- Slide 1: Cover -->
+<div class="slide slide-1">
+  <div class="corner">網路新聞 2026</div>
+  <div class="week">Week 11</div>
+  <h1><span>ASR</span><br>自動語音辨識入門</h1>
+  <div class="sub">從 YouTube 影片到校稿完成的新聞稿</div>
+  <div class="meta">2026/05/05 · 世新大學傳播學院</div>
+</div>
+
+<!-- Slide 2: What is ASR -->
+<div class="slide slide-2">
+  <div class="label">概念</div>
+  <h2>ASR 是什麼？</h2>
+  <div class="definition">
+    自動語音辨識（Automatic Speech Recognition）<br>
+    = 把聲音變成文字的技術
+  </div>
+  <div class="flow">
+    <span class="box">🎤 音檔</span>
+    <span class="arrow">→</span>
+    <span class="box">🤖 ASR 引擎</span>
+    <span class="arrow">→</span>
+    <span class="box">📝 逐字稿</span>
+    <span class="arrow">→</span>
+    <span class="box">✍️ 校稿</span>
+    <span class="arrow">→</span>
+    <span class="box">📰 新聞稿</span>
+  </div>
+</div>
+
+<!-- Slide 3: Three engines -->
+<div class="slide slide-3">
+  <div class="label">工具</div>
+  <h2>三種引擎比較</h2>
+  <div class="engines">
+    <div class="engine w">
+      <h3>Whisper</h3>
+      <div class="desc">OpenAI 開源<br>通用型，速度最快</div>
+      <div class="stat">50 min 音檔<br><strong>58 秒</strong>完成</div>
+    </div>
+    <div class="engine b">
+      <h3>Breeze</h3>
+      <div class="desc">聯發科開源<br>台灣華語 + 台語</div>
+      <div class="stat">台語辨識<br><strong>最佳</strong></div>
+    </div>
+    <div class="engine q">
+      <h3>Qwen3-ASR</h3>
+      <div class="desc">阿里巴巴開源<br>文字品質最好</div>
+      <div class="stat">標點斷句<br><strong>最精準</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 4: Common errors -->
+<div class="slide slide-4">
+  <div class="label">校稿重點</div>
+  <h2>ASR 常見錯誤類型</h2>
+  <div class="error-grid">
+    <div class="error-item">
+      <div class="type">同音字</div>
+      <div class="example"><span class="wrong">新聞港</span> → <span class="right">新聞稿</span></div>
+      <div class="note">港/稿 同音，ASR 最常犯的錯</div>
+    </div>
+    <div class="error-item">
+      <div class="type">大陸用語</div>
+      <div class="example"><span class="wrong">登錄</span> → <span class="right">登入</span></div>
+      <div class="note">模型訓練資料以簡中為主</div>
+    </div>
+    <div class="error-item">
+      <div class="type">人名</div>
+      <div class="example"><span class="wrong">秦林謙</span> → <span class="right">？</span></div>
+      <div class="note">人名是 ASR 最弱的環節，必須人工確認</div>
+    </div>
+    <div class="error-item">
+      <div class="type">專有名詞</div>
+      <div class="example"><span class="wrong">矽直線</span> → <span class="right">汐止線</span></div>
+      <div class="note">地名、機構名常被聽錯</div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 5: Practice -->
+<div class="slide slide-5">
+  <h2>課堂實作步驟</h2>
+  <ol class="steps">
+    <li>用 yt-dlp 下載一段 YouTube 影片的音檔</li>
+    <li>用 Vibe 或 rescrit-lite 轉錄成逐字稿</li>
+    <li>校對前 3 分鐘，記錄錯誤類型</li>
+    <li>把逐字稿改寫成 300 字新聞稿</li>
+    <li>繳交：SRT + 校稿記錄 + 新聞稿</li>
+  </ol>
+  <div class="prompt">💡 跟 agent 說：「幫我下載這段 YouTube 影片的音檔，然後用 Whisper 轉錄成 SRT」</div>
+</div>
+
+</body>
+</html>
