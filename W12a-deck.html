@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W12｜發布：把新聞稿變成網站</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; background: #0a0a0a; }
+body { font-family: 'Noto Sans TC', -apple-system, sans-serif; }
+
+.deck { width: 100vw; height: 100vh; position: relative; }
+.slide { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: none; padding: 60px 80px; overflow-y: auto; }
+.slide.active { display: flex; flex-direction: column; justify-content: center; }
+
+/* Navigation */
+.nav { position: fixed; bottom: 30px; right: 40px; z-index: 100; display: flex; gap: 12px; align-items: center; }
+.nav button { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 18px; transition: background 0.2s; }
+.nav button:hover { background: rgba(255,255,255,0.2); }
+.nav .counter { color: rgba(255,255,255,0.4); font-size: 14px; font-family: monospace; }
+
+/* Slide styles */
+.slide h1 { font-size: 3.2rem; font-weight: 900; line-height: 1.2; margin-bottom: 1.5rem; }
+.slide h2 { font-size: 2rem; font-weight: 800; margin-bottom: 1rem; }
+.slide p { font-size: 1.3rem; line-height: 1.7; margin-bottom: 1rem; }
+.slide .small { font-size: 1rem; color: rgba(255,255,255,0.5); }
+.slide .label { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; }
+.slide code { background: rgba(255,255,255,0.08); padding: 0.2em 0.5em; border-radius: 4px; font-family: 'SF Mono', monospace; font-size: 0.9em; }
+.slide pre { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1.2rem 1.5rem; font-family: 'SF Mono', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 1rem 0; white-space: pre-wrap; }
+.slide ul, .slide ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+.slide li { font-size: 1.2rem; line-height: 1.8; margin-bottom: 0.5rem; }
+.slide .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
+.slide .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; }
+.slide .card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.slide .card p { font-size: 1rem; opacity: 0.7; }
+.slide .highlight { color: #e74c3c; }
+.slide .accent { color: #3b82f6; }
+.slide .green { color: #10b981; }
+.slide .prompt-box { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3); border-radius: 8px; padding: 1.2rem 1.5rem; margin: 1rem 0; }
+.slide .prompt-box::before { content: '💬 貼給 agent：'; display: block; font-size: 0.8rem; font-weight: 700; color: #3b82f6; margin-bottom: 0.5rem; }
+.slide .check { color: #10b981; font-weight: 700; }
+.slide .big-emoji { font-size: 4rem; margin-bottom: 1rem; }
+
+/* Specific slide themes */
+.dark { background: #0f0f0f; color: #f5f5f5; }
+.dark-blue { background: linear-gradient(160deg, #0f0f0f, #1a1a2e, #16213e); color: #f5f5f5; }
+.warm { background: #FDF6EC; color: #1a1a1a; }
+.warm .label { color: #c0392b; }
+.red-accent { background: #0f0f0f; color: #f5f5f5; }
+.red-accent h1 span { color: #e74c3c; }
+
+/* Color swatches */
+.color-row { display: flex; gap: 1rem; margin: 0.5rem 0; align-items: center; }
+.color-swatch { width: 40px; height: 40px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); }
+.color-row span { font-size: 0.9rem; font-family: monospace; }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<!-- Slide 1: Cover -->
+<div class="slide dark-blue active" id="s1">
+  <div class="label" style="color:#e74c3c;">Week 12</div>
+  <h1>發布：<br>把新聞稿<span class="highlight">變成網站</span></h1>
+  <p class="small">Astro + GitHub Pages + 一稿多發</p>
+  <p class="small" style="margin-top:2rem;">2026/05/12 · 世新大學網路新聞</p>
+</div>
+
+<!-- Slide 2: Recap -->
+<div class="slide dark" id="s2">
+  <div class="big-emoji">📝</div>
+  <h1>上週你做了什麼？</h1>
+  <ul>
+    <li>下載 YouTube 影片</li>
+    <li>用 ASR 轉錄成逐字稿</li>
+    <li>校稿（同音字 + 人工確認）</li>
+    <li>寫成新聞稿</li>
+  </ul>
+  <p style="margin-top:2rem; font-size:1.5rem; font-weight:700;">但是那篇新聞稿在哪裡？</p>
+  <p class="highlight" style="font-size:1.8rem; font-weight:900;">在你的電腦裡。沒有人看得到。</p>
+</div>
+
+<!-- Slide 3: Today's question -->
+<div class="slide red-accent" id="s3">
+  <div class="big-emoji">🌐</div>
+  <h1>今天的問題</h1>
+  <p style="font-size:1.8rem; margin-top:1rem;">怎麼用最少的步驟，<br>把一篇 Markdown 新聞稿<br>變成一個<span class="highlight">有網址的網站</span>？</p>
+  <p style="margin-top:2rem; font-size:2rem; font-weight:900;">答案：<span class="accent">Astro</span> + <span class="green">GitHub Pages</span></p>
+</div>
+
+<!-- Slide 4: What is Astro -->
+<div class="slide dark" id="s4">
+  <div class="label" style="color:#3b82f6;">概念</div>
+  <h2>Astro 是什麼？</h2>
+  <p>一個靜態網站產生器。你寫 Markdown，它幫你變成漂亮的網頁。</p>
+  <div class="grid-2" style="margin-top:1.5rem;">
+    <div class="card">
+      <h3>靜態網站 ✅</h3>
+      <p>速度快、安全、免費託管<br>適合新聞、部落格、作品集</p>
+    </div>
+    <div class="card">
+      <h3>動態網站（WordPress）</h3>
+      <p>要付主機費、慢、容易被駭<br>適合需要後台登入的網站</p>
+    </div>
+  </div>
+  <p style="margin-top:1.5rem;">GitHub Pages = 免費的網站空間。推上去就有網址。</p>
+</div>
+
+<!-- Slide 5: Demo flow -->
+<div class="slide dark-blue" id="s5">
+  <div class="label" style="color:#10b981;">流程</div>
+  <h2>從零到上線，5 步驟</h2>
+  <ol style="font-size:1.4rem; line-height:2.2;">
+    <li><code>npm create astro@latest</code> — 建專案</li>
+    <li>把新聞稿 <code>.md</code> 丟進去</li>
+    <li><code>git push</code> — 推上 GitHub</li>
+    <li>等 30 秒 — GitHub Actions 自動部署</li>
+    <li>打開 <code>https://你的帳號.github.io/news/</code></li>
+  </ol>
+  <p style="margin-top:2rem; font-size:1.5rem; font-weight:700;" class="green">你今天要做的就是這件事。</p>
+</div>
+
+<!-- Slide 6: Phase 1 -->
+<div class="slide dark" id="s6">
+  <div class="label" style="color:#3b82f6;">Phase 1</div>
+  <h2>建專案</h2>
+  <div class="prompt-box">
+    <pre>幫我用 Astro 建一個新聞網站。
+用 blog template，不要 TypeScript。
+網站標題改成「___新聞」。
+建完後跑 npm run dev 讓我預覽。</pre>
+  </div>
+  <p class="check" style="margin-top:1rem;">✅ 確認：瀏覽器打開 localhost:4321，看到網站了嗎？</p>
+  <div class="prompt-box" style="margin-top:1.5rem;">
+    <pre>把以下新聞稿放進 Astro blog 資料夾，
+加上 frontmatter（title、description、pubDate）。
+
+（貼上你的新聞稿）</pre>
+  </div>
+  <p class="check">✅ 確認：首頁列表有你的文章了嗎？</p>
+</div>
+
+<!-- Slide 7: Phase 2 -->
+<div class="slide dark" id="s7">
+  <div class="label" style="color:#3b82f6;">Phase 2</div>
+  <h2>推上 GitHub，讓全世界看到</h2>
+  <div class="prompt-box">
+    <pre>幫我把這個 Astro 專案部署到 GitHub Pages。
+1. 用 gh CLI 建一個 public repo（名稱叫 my-news）
+2. 設定 astro.config.mjs 的 site 和 base
+3. 建立 .github/workflows/deploy.yml
+4. 全部 commit 並 push
+我的 GitHub 帳號是：___</pre>
+  </div>
+  <p style="margin-top:1rem;">然後去 GitHub repo → Settings → Pages → Source 選 <strong>GitHub Actions</strong></p>
+  <p class="check" style="margin-top:1rem; font-size:1.3rem;">✅ 打開 https://你的帳號.github.io/my-news/ — 上線了！</p>
+</div>
+
+<!-- Slide 8: Color -->
+<div class="slide dark" id="s8">
+  <div class="label" style="color:#e74c3c;">Phase 2.5</div>
+  <h2>選一個配色（30 秒）</h2>
+  <div class="grid-2">
+    <div>
+      <div class="color-row"><div class="color-swatch" style="background:#1a1a1a"></div><span>經典報紙 — 嚴肅新聞</span></div>
+      <div class="color-row"><div class="color-swatch" style="background:#0f172a"></div><span>現代科技 — 科技報導</span></div>
+      <div class="color-row"><div class="color-swatch" style="background:#292524"></div><span>溫暖生活 — 美食/校園</span></div>
+      <div class="color-row"><div class="color-swatch" style="background:#1e3a5f"></div><span>校園清新 — 學生報</span></div>
+      <div class="color-row"><div class="color-swatch" style="background:#0f0f0f"></div><span>暗色模式 — 技術內容</span></div>
+    </div>
+    <div>
+      <p>選好後跟 agent 說：</p>
+      <div class="prompt-box" style="font-size:0.9rem;">
+        <pre>把我的網站配色改成「經典報紙」：
+主色 #1a1a1a、強調色 #c0392b、
+背景 #FAFAF8、文字 #333333。
+改完後 commit 並 push。</pre>
+      </div>
+      <p style="margin-top:1rem; font-size:0.9rem;">或去 <span class="accent">color.adobe.com</span> 自己配</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 9: Multi-publish -->
+<div class="slide dark-blue" id="s9">
+  <div class="label" style="color:#f39c12;">Phase 4（選做）</div>
+  <h2>一稿多發</h2>
+  <p>同一篇新聞稿，轉成不同平台的版本：</p>
+  <div class="grid-2" style="margin-top:1rem;">
+    <div class="card">
+      <h3>📱 社群文字版</h3>
+      <div class="prompt-box" style="font-size:0.85rem;">
+        <pre>把這篇新聞稿轉成：
+1. FB 貼文（500字+hashtag）
+2. X（280字+連結）
+3. IG caption（200字+emoji）</pre>
+      </div>
+    </div>
+    <div class="card">
+      <h3>🎨 社群圖卡</h3>
+      <div class="prompt-box" style="font-size:0.85rem;">
+        <pre>做 3 張 1080×1080 IG 輪播圖
+主題：（你的新聞標題）
+風格：Editorial Monocle
+每張一個重點</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 10: Tools -->
+<div class="slide dark" id="s10">
+  <div class="label" style="color:#a78bfa;">設計工具</div>
+  <h2>Open Design + UI UX Pro Max</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Open Design</h3>
+      <p>獨立設計工具（有 UI）<br>129 種品牌風格<br>31 種 Skill<br>產出 HTML 圖卡/簡報/網頁</p>
+      <p style="margin-top:0.5rem;"><code>github.com/nexu-io/open-design</code></p>
+    </div>
+    <div class="card">
+      <h3>UI UX Pro Max</h3>
+      <p>裝在 agent 裡的技能<br>67 種 UI 風格<br>161 種產業規則<br>直接產出程式碼到你的專案</p>
+      <p style="margin-top:0.5rem;"><code>npm install -g uipro-cli</code></p>
+    </div>
+  </div>
+  <p style="margin-top:1.5rem; font-size:1rem; opacity:0.6;">詳見 060_open-design-guide.md 和 065_ui-ux-pro-max-guide.md</p>
+</div>
+
+<!-- Slide 11: Homework -->
+<div class="slide red-accent" id="s11">
+  <div class="big-emoji">🎯</div>
+  <h1>下課前你要有：</h1>
+  <ol style="font-size:1.4rem; line-height:2.5;">
+    <li><strong>一個能打開的網址</strong>（GitHub Pages）</li>
+    <li><strong>網站上至少 2 篇文章</strong></li>
+    <li><strong>requirement.md</strong>（你自己寫，至少 2 條 user story）</li>
+    <li>（選做）一稿多發版本（FB/X/IG 任兩個）</li>
+  </ol>
+  <p style="margin-top:2rem; font-size:1.2rem;">📝 表單：<span class="accent">（上課時公布）</span></p>
+  <p style="margin-top:0.5rem; font-size:1rem; opacity:0.5;">全部免費。Astro 開源。GitHub Pages 免費。AI 用免費額度。</p>
+</div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <span class="counter"><span id="current">1</span> / <span id="total">11</span></span>
+  <button id="prev">←</button>
+  <button id="next">→</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+const total = slides.length;
+document.getElementById('total').textContent = total;
+
+function show(n) {
+  slides[current].classList.remove('active');
+  current = (n + total) % total;
+  slides[current].classList.add('active');
+  document.getElementById('current').textContent = current + 1;
+}
+
+document.getElementById('prev').onclick = () => show(current - 1);
+document.getElementById('next').onclick = () => show(current + 1);
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1); }
+  if (e.key === 'Home') show(0);
+  if (e.key === 'End') show(total - 1);
+});
+
+// Touch swipe
+let touchX = 0;
+document.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+document.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].clientX - touchX;
+  if (diff > 50) show(current - 1);
+  if (diff < -50) show(current + 1);
+});
+</script>
+
+</body>
+</html>
