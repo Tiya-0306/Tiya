@@ -1,141 +1,221 @@
 /*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+  冰藍與米白配色主題
+  主色：冰藍 (#0284c7, #0369a1, #0c4a6e)
+  輔色：米白 (#fefce8, #fef3c7, #f8fafc)
+*/
 
-:root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
-}
-body {
-	font-family: var(--font-atkinson);
+* {
+	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
 }
+
+:root {
+	/* 冰藍色系 */
+	--primary-blue: #0284c7;
+	--primary-blue-dark: #0369a1;
+	--primary-blue-darker: #0c4a6e;
+	--primary-blue-light: #38bdf8;
+	--primary-blue-lighter: #7dd3fc;
+	
+	/* 米白色系 */
+	--cream-white: #fefce8;
+	--cream-light: #fef3c7;
+	--cream-lighter: #fef9c3;
+	--off-white: #f8fafc;
+	--pure-white: #ffffff;
+	
+	/* 背景色 */
+	--bg-primary: #f0f9ff;
+	--bg-secondary: #e0f2fe;
+	--bg-card: var(--pure-white);
+	
+	/* 文字色 */
+	--text-primary: #0f172a;
+	--text-secondary: #334155;
+	--text-muted: #64748b;
+	
+	/* 邊框色 */
+	--border-color: #bae6fd;
+	--border-light: #e0f2fe;
+	
+	/* 陰影 */
+	--shadow-sm: 0 1px 2px rgba(14, 165, 233, 0.05);
+	--shadow-md: 0 4px 6px rgba(14, 165, 233, 0.1);
+	--shadow-lg: 0 10px 15px rgba(14, 165, 233, 0.15);
+	
+	/* 字體 */
+	--font-family: var(--font-atkinson), system-ui, -apple-system, sans-serif;
+}
+
+html {
+	font-family: var(--font-family);
+	background: var(--bg-primary);
+	background-size: 224px;
+	color: var(--text-primary);
+}
+
+body {
+	margin: 0;
+	line-height: 1.6;
+}
+
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+	width: 100%;
+	max-width: 52rem;
+	margin: 0 auto;
+	padding: 3rem 1rem;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+
+h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
+	color: var(--primary-blue-darker);
 	line-height: 1.2;
 }
+
 h1 {
-	font-size: 3.052em;
+	font-size: 2.5rem;
 }
+
 h2 {
-	font-size: 2.441em;
+	font-size: 2rem;
 }
+
 h3 {
-	font-size: 1.953em;
+	font-size: 1.5rem;
 }
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
-a {
-	color: var(--accent);
-}
-a:hover {
-	color: var(--accent);
-}
+
 p {
-	margin-bottom: 1em;
+	margin-bottom: 1rem;
+	color: var(--text-secondary);
 }
-.prose p {
-	margin-bottom: 2em;
+
+a {
+	color: var(--primary-blue);
+	text-decoration: none;
+	transition: color 0.2s;
 }
-textarea {
-	width: 100%;
-	font-size: 16px;
+
+a:hover {
+	color: var(--primary-blue-dark);
+	text-decoration: underline;
 }
-input {
-	font-size: 16px;
+
+code {
+	font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+		Bitstream Vera Sans Mono, Courier New, monospace;
+	background: var(--bg-secondary);
+	padding: 0.2rem 0.4rem;
+	border-radius: 0.25rem;
+	font-size: 0.9em;
+	color: var(--primary-blue-dark);
 }
-table {
-	width: 100%;
+
+pre {
+	background: var(--primary-blue-darker);
+	color: var(--cream-white);
+	padding: 1rem;
+	border-radius: 0.5rem;
+	overflow-x: auto;
+	margin: 1rem 0;
 }
+
+pre code {
+	background: transparent;
+	color: inherit;
+	padding: 0;
+}
+
+blockquote {
+	border-left: 4px solid var(--primary-blue);
+	padding-left: 1rem;
+	margin: 1.5rem 0;
+	font-style: italic;
+	color: var(--text-secondary);
+	background: var(--bg-secondary);
+	padding: 1rem 1rem 1rem 1.5rem;
+	border-radius: 0 0.5rem 0.5rem 0;
+}
+
+ul, ol {
+	margin: 1rem 0;
+	padding-left: 2rem;
+	color: var(--text-secondary);
+}
+
+li {
+	margin-bottom: 0.5rem;
+}
+
+hr {
+	border: none;
+	border-top: 2px solid var(--border-light);
+	margin: 2rem 0;
+}
+
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
+	border-radius: 0.5rem;
 }
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5rem 0;
 }
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
+
+th, td {
+	padding: 0.75rem;
+	text-align: left;
+	border-bottom: 1px solid var(--border-light);
 }
-pre > code {
-	all: unset;
+
+th {
+	background: var(--bg-secondary);
+	color: var(--primary-blue-darker);
+	font-weight: 600;
 }
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
+
+tr:hover {
+	background: var(--off-white);
 }
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+	h1 {
+		font-size: 2rem;
 	}
+	
+	h2 {
+		font-size: 1.5rem;
+	}
+	
 	main {
-		padding: 1em;
+		padding: 2rem 1rem;
 	}
 }
 
-.sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
-	white-space: nowrap;
+/* 選取文字顏色 */
+::selection {
+	background: var(--primary-blue-light);
+	color: white;
+}
+
+/* 滾動條樣式 */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--off-white);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--primary-blue-light);
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--primary-blue);
 }
