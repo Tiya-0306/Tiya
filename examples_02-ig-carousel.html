@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IG 輪播圖範例 — 基隆捷運爭議懶人包</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Sans TC', -apple-system, sans-serif; background: #111; display: flex; justify-content: center; align-items: center; min-height: 100vh; gap: 2rem; flex-wrap: wrap; padding: 2rem; }
+
+.card {
+  width: 1080px; height: 1080px;
+  transform: scale(0.35); transform-origin: top left;
+  margin-bottom: -702px; margin-right: -702px;
+  position: relative; overflow: hidden;
+}
+
+/* Card 1: Timeline */
+.card-1 {
+  background: #FDF6EC;
+  padding: 80px;
+}
+.card-1 .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 60px; }
+.card-1 .tag { background: #c0392b; color: white; font-size: 28px; font-weight: 700; padding: 8px 24px; letter-spacing: 0.05em; }
+.card-1 h1 { font-size: 72px; font-weight: 900; line-height: 1.2; color: #1a1a1a; margin-bottom: 40px; }
+.card-1 .subtitle { font-size: 32px; color: #666; margin-bottom: 60px; }
+.timeline { position: relative; padding-left: 60px; }
+.timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 4px; background: #c0392b; }
+.timeline-item { margin-bottom: 40px; position: relative; }
+.timeline-item::before { content: ''; position: absolute; left: -48px; top: 8px; width: 16px; height: 16px; background: #c0392b; border-radius: 50%; }
+.timeline-item .year { font-size: 28px; font-weight: 800; color: #c0392b; }
+.timeline-item .desc { font-size: 28px; color: #333; margin-top: 4px; }
+.card .page-num { position: absolute; bottom: 60px; right: 80px; font-size: 24px; color: #999; }
+.card .brand { position: absolute; bottom: 60px; left: 80px; font-size: 24px; font-weight: 700; color: #1a1a1a; }
+
+/* Card 2: Stakeholders */
+.card-2 {
+  background: #1a1a1a;
+  padding: 80px;
+  color: white;
+}
+.card-2 h1 { font-size: 64px; font-weight: 900; margin-bottom: 60px; line-height: 1.2; }
+.stakeholder { margin-bottom: 48px; padding: 40px; border-radius: 12px; }
+.stakeholder.gov { background: #2c3e50; border-left: 6px solid #3498db; }
+.stakeholder.city { background: #1e3a2c; border-left: 6px solid #27ae60; }
+.stakeholder.civil { background: #3b2c1e; border-left: 6px solid #e67e22; }
+.stakeholder h3 { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+.stakeholder p { font-size: 26px; color: #ccc; line-height: 1.5; }
+.stakeholder .quote { font-style: italic; color: #aaa; margin-top: 8px; font-size: 24px; }
+
+/* Card 3: Conclusion */
+.card-3 {
+  background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
+  padding: 80px;
+  color: white;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.card-3 .icon { font-size: 80px; margin-bottom: 40px; }
+.card-3 h1 { font-size: 60px; font-weight: 900; margin-bottom: 40px; line-height: 1.3; }
+.card-3 .points { list-style: none; }
+.card-3 .points li { font-size: 30px; margin-bottom: 24px; padding-left: 40px; position: relative; color: #ddd; line-height: 1.5; }
+.card-3 .points li::before { content: '→'; position: absolute; left: 0; color: #e74c3c; font-weight: 700; }
+.card-3 .cta { margin-top: 60px; font-size: 26px; color: #888; border-top: 1px solid #444; padding-top: 30px; }
+</style>
+</head>
+<body>
+
+<!-- Card 1: Timeline -->
+<div class="card card-1">
+  <div class="header">
+    <span class="tag">懶人包</span>
+  </div>
+  <h1>基隆捷運<br>規劃爭議</h1>
+  <div class="subtitle">20 年來的規劃變遷</div>
+  <div class="timeline">
+    <div class="timeline-item"><span class="year">2006</span><div class="desc">基隆輕軌首次提出</div></div>
+    <div class="timeline-item"><span class="year">2016</span><div class="desc">改為基隆捷運，延伸至南港</div></div>
+    <div class="timeline-item"><span class="year">2022</span><div class="desc">行政院核定基隆捷運計畫</div></div>
+    <div class="timeline-item"><span class="year">2024</span><div class="desc">交通部提出「二選一」方案</div></div>
+    <div class="timeline-item"><span class="year">2026</span><div class="desc">基隆市府強烈反對，爭議持續</div></div>
+  </div>
+  <div class="brand">世新快訊</div>
+  <div class="page-num">1 / 3</div>
+</div>
+
+<!-- Card 2: Stakeholders -->
+<div class="card card-2">
+  <h1>各方立場</h1>
+  <div class="stakeholder gov">
+    <h3>🏛 交通部</h3>
+    <p>路廊空間不足，臺鐵與捷運只能擇一</p>
+    <div class="quote">「基隆到八堵這段，物理上放不下兩套系統」</div>
+  </div>
+  <div class="stakeholder city">
+    <h3>🏙 基隆市政府</h3>
+    <p>捷運是基隆人等了 20 年的承諾，不能再跳票</p>
+    <div class="quote">「臺鐵不能取代捷運的通勤功能」</div>
+  </div>
+  <div class="stakeholder civil">
+    <h3>👥 民間團體</h3>
+    <p>要求公開評估報告，讓市民參與決策</p>
+    <div class="quote">「不要再用技術問題掩蓋政治決定」</div>
+  </div>
+  <div class="brand" style="color: white;">世新快訊</div>
+  <div class="page-num" style="color: #666;">2 / 3</div>
+</div>
+
+<!-- Card 3: Conclusion -->
+<div class="card card-3">
+  <div class="icon">⚡</div>
+  <h1>這件事<br>為什麼重要？</h1>
+  <ul class="points">
+    <li>影響 40 萬基隆通勤族的每日交通</li>
+    <li>牽動北北基桃都會區整體路網規劃</li>
+    <li>涉及超過 800 億預算的公共建設決策</li>
+    <li>反映中央與地方在交通政策上的角力</li>
+  </ul>
+  <div class="cta">💬 你覺得基隆需要捷運嗎？留言告訴我們 → @世新快訊</div>
+  <div class="brand" style="color: white;">世新快訊</div>
+  <div class="page-num" style="color: #666;">3 / 3</div>
+</div>
+
+</body>
+</html>
