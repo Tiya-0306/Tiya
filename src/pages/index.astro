@@ -6,44 +6,147 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-TW">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<section class="hero">
+				<h1>📰 今日新聞</h1>
+				<p class="tagline">最新校園與生活資訊，每日更新</p>
+			</section>
+
+			<section class="intro">
+				<h2>關於本站</h2>
+				<p>
+					歡迎來到「今日新聞」！這是一個使用 <a href="https://astro.build/" target="_blank">Astro</a> 建立的新聞網站，
+					專注於報導校園生活、學生成就、社會議題等多元內容。
+				</p>
+				<p>
+					本站採用現代化的靜態網站技術，部署在 <strong>GitHub Pages</strong>，
+					提供快速、穩定的閱讀體驗。所有文章使用 Markdown 格式撰寫，
+					透過 GitHub Actions 自動部署更新。
+				</p>
+			</section>
+
+			<section class="features">
+				<h2>網站特色</h2>
+				<div class="feature-grid">
+					<div class="feature-card">
+						<h3>⚡ 快速載入</h3>
+						<p>靜態網站生成，秒速開啟</p>
+					</div>
+					<div class="feature-card">
+						<h3>📱 響應式設計</h3>
+						<p>手機、平板、電腦完美適配</p>
+					</div>
+					<div class="feature-card">
+						<h3>🔄 自動部署</h3>
+						<p>推送即更新，無需手動操作</p>
+					</div>
+					<div class="feature-card">
+						<h3>🎨 簡潔美觀</h3>
+						<p>冰藍米白配色，舒適閱讀</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="cta">
+				<h2>開始閱讀</h2>
+				<p>探索最新的校園新聞、學生故事和社會議題報導</p>
+				<a href="/blog/" class="cta-button">查看所有文章 →</a>
+			</section>
 		</main>
 		<Footer />
+		<style>
+			.hero {
+				text-align: center;
+				padding: 3rem 1rem;
+				background: linear-gradient(135deg, #e0f2fe 0%, #f8fafc 100%);
+				border-radius: 1rem;
+				margin-bottom: 3rem;
+			}
+			.hero h1 {
+				font-size: 3rem;
+				margin-bottom: 0.5rem;
+				color: #0c4a6e;
+			}
+			.tagline {
+				font-size: 1.25rem;
+				color: #0369a1;
+				font-weight: 500;
+			}
+			.intro, .features, .cta {
+				margin-bottom: 3rem;
+			}
+			.intro h2, .features h2, .cta h2 {
+				color: #0c4a6e;
+				margin-bottom: 1rem;
+			}
+			.intro p {
+				line-height: 1.8;
+				margin-bottom: 1rem;
+				color: #334155;
+			}
+			.intro a {
+				color: #0284c7;
+				text-decoration: underline;
+			}
+			.feature-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 1.5rem;
+				margin-top: 2rem;
+			}
+			.feature-card {
+				background: #f0f9ff;
+				padding: 1.5rem;
+				border-radius: 0.75rem;
+				border: 2px solid #bae6fd;
+				transition: transform 0.2s, box-shadow 0.2s;
+			}
+			.feature-card:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 8px 16px rgba(14, 165, 233, 0.15);
+			}
+			.feature-card h3 {
+				color: #0369a1;
+				margin-bottom: 0.5rem;
+				font-size: 1.25rem;
+			}
+			.feature-card p {
+				color: #475569;
+				margin: 0;
+			}
+			.cta {
+				text-align: center;
+				padding: 3rem 1rem;
+				background: linear-gradient(135deg, #f0f9ff 0%, #fefce8 100%);
+				border-radius: 1rem;
+			}
+			.cta h2 {
+				margin-bottom: 0.5rem;
+			}
+			.cta p {
+				color: #475569;
+				margin-bottom: 2rem;
+			}
+			.cta-button {
+				display: inline-block;
+				background: #0284c7;
+				color: white;
+				padding: 0.875rem 2rem;
+				border-radius: 0.5rem;
+				text-decoration: none;
+				font-weight: 600;
+				transition: background 0.2s, transform 0.2s;
+			}
+			.cta-button:hover {
+				background: #0369a1;
+				transform: scale(1.05);
+			}
+		</style>
 	</body>
 </html>
